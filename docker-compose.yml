@@ -1,0 +1,51 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: finops-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: finops_expense_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - finops_pg_data:/var/lib/postgresql/data
+    networks:
+      - finops-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: finops-api
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: Host=postgres;Database=finops_expense_db;Username=postgres;Password=postgres
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    networks:
+      - finops-network
+
+  web:
+    build:
+      context: ./finops-expense-web
+      dockerfile: Dockerfile
+    container_name: finops-web
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - finops-network
+
+networks:
+  finops-network:
+    driver: bridge
+
+volumes:
+  finops_pg_data:

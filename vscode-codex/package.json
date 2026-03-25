@@ -1,0 +1,36 @@
+{
+  "name": "codex",
+  "displayName": "Codex",
+  "publisher": "your-name",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onView:codex.view"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codex",
+          "title": "Codex"
+        }
+      ]
+    },
+    "views": {
+      "codex": [
+        {
+          "id": "codex.view",
+          "name": "Codex"
+        }
+      ]
+    }
+  },
+  "keywords": [
+    "codex",
+    "activitybar",
+    "webview"
+  ]
+}
