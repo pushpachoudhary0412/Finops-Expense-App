@@ -23,3 +23,5 @@ vscode-codex/
 # Environment / local overrides
 .env
 .env.*
+
+# Repo housekeeping
