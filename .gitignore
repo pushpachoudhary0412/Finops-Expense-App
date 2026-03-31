@@ -15,6 +15,7 @@ dist/
 # IDE
 .vscode/
 .idea/
+vscode-codex/
 
 # Logs
 *.log
